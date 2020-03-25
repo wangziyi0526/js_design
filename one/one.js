@@ -39,7 +39,7 @@ let Fnobject = function(){
      stri = stri + `I am ${name}!`
      return this;
   }
-  
+
   this.age = function(age){
      stri = stri + `${age} yearsOld`
      console.log(stri)
@@ -49,3 +49,21 @@ let Fnobject = function(){
 
 let a = new Fnobject();
 a.name('wzy').age(29);
+
+// 3.在原型链上利用prototype属性添加函数
+Function.prototype.addMethods = function(name,fn){
+  this.prototype[name] = fn;
+  return this;
+}
+let Methods = function(){};
+Methods.addMethods('checkName',function(name){
+  console.log(name);
+  return this;
+});
+Methods.addMethods('checkEmail',function(email){
+  console.log(email)
+  return this;
+});
+
+let m = new Methods();
+m.checkName('wzy').checkEmail("18510126271@163.com");
