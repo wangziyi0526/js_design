@@ -39,6 +39,7 @@ let Fnobject = function(){
      stri = stri + `I am ${name}!`
      return this;
   }
+  
   this.age = function(age){
      stri = stri + `${age} yearsOld`
      console.log(stri)
