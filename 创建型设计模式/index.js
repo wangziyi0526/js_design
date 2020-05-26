@@ -37,11 +37,10 @@ var sportsFactroy = function(name){
 }
 
 var football = sportsFactroy('worldCup');
-console.log(football);
-console.log(football.intro);
 football.getMember();
 
 var basketball = sportsFactroy('NBA');
-console.log(basketball);
 basketball.getMember();
+
+console.log(sportsFactroy)
 
