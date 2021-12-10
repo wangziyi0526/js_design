@@ -23,29 +23,69 @@
 // console.log(p2.toString())
 
 //利用 Object.assign()
+//
+// let getName = function () {
+//     return this.name
+// }
+//
+// let getAge = function () {
+//     return this.age
+// }
+//
+// class Peron {
+//     constructor(name,age) {
+//         this.name = name
+//         this.age = age
+//     }
+// }
+//
+// Object.assign(Peron.prototype,{
+//     getName,
+//     getAge
+// })
+//
+// let p = new Peron('wzy',28)
+//
+// console.log(p)
+// console.log(p.getName())
+// console.log(p.getAge())
 
-let getName = function () {
-    return this.name
-}
+// class Foo {
+//     constructor() {
+//         return Object.create(null)
+//     }
+// }
+// console.log(new Foo() instanceof Foo)
+// class Logger {
+//     constructor() {
+//         this.printName = this.printName.bind(this)
+//         this.print = this.print.bind(this)
+//         this.name = 'Bryant'
+//     }
+//     printName(name = 'there') {
+//         this.print(`Hello ${this.name}`)
+//     }
+//     print(text) {
+//         console.log(text)
+//         console.log(this.name)
+//     }
+//
+// }
+// const logger = new Logger();
+// const { printName,print } = logger;
+// printName();
+// print()
 
-let getAge = function () {
-    return this.age
-}
-
-class Peron {
-    constructor(name,age) {
-        this.name = name
-        this.age = age
+class Foo {
+    static classMethod () {
+        return 'hello'
     }
 }
 
-Object.assign(Peron.prototype,{
-    getName,
-    getAge
-})
-
-let p = new Peron('wzy',28)
-
-console.log(p)
-console.log(p.getName())
-console.log(p.getAge())
+class Bar extends Foo {
+    static classMethod () {
+        console.log('super',super)
+        return super.classMethod() +', too';
+    }
+}
+Bar.classMethod()
