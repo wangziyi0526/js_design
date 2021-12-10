@@ -76,16 +76,63 @@
 // printName();
 // print()
 
-class Foo {
-    static classMethod () {
-        return 'hello'
+// class Foo {
+//     static classMethod () {
+//         return 'hello'
+//     }
+// }
+//
+// class Bar extends Foo {
+//     static classMethod () {
+//         console.log('super',super)
+//         return super.classMethod() +', too';
+//     }
+// }
+// Bar.classMethod()
+
+// class Widget {
+//
+//     // 公有方法
+//     foo (baz) {
+//         this._bar(baz);
+//     }
+//
+//     // 私有方法
+//     _bar(baz) {
+//         return this.snaf = baz;
+//     }
+//
+//     // ...
+// }
+// let w = new Widget()
+// w.foo('name')
+// w._bar('age')
+//
+// class Widgets {
+//     foo (baz) {
+//         bar.call(this, baz);
+//         console.log(name)
+//     }
+//
+//     // ...
+// }
+//
+// function bar(baz) {
+//     return this.snaf = baz;
+// }
+// let w1 = new Widgets()
+// w1.foo('kobe')
+// console.log('ss',w1.snaf)
+
+class IncreasingCounter {
+    #count = 0;
+
+    increment() {
+
+        this.#count++;
+        console.log(this.#count)
     }
 }
 
-class Bar extends Foo {
-    static classMethod () {
-        console.log('super',super)
-        return super.classMethod() +', too';
-    }
-}
-Bar.classMethod()
+let inc = new IncreasingCounter()
+console.log(inc.increment())
