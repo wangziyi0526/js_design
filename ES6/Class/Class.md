@@ -117,13 +117,13 @@ Point.prototype.constructor = Point // true
 另外，类的内部所有定义的方法，都是不可枚举的(non-enumerable)
 ```js
 class Point {
-    constructor(x, y) {
-        // ...
-    }
+  constructor(x, y) {
+    // ...
+  }
 
-    toString() {
-        // ...
-    }
+  toString() {
+    // ...
+  }
 }
 
 Object.keys(Point.prototype) // 
@@ -367,3 +367,55 @@ class Foo {
 上面代码中，老写法的静态属性定义在类的外部。整个类生成以后，再生成静态属性。这样让人很容易忽略这个静态属性，也不符合
 相关代码应该放在一起的代码组织规则。另外，新写法是显式声明，而不是复制处理，语义更好
 
+### 私有方法和私有属性
+
+#### 现有的解决方案
+
+私有方法和私有属性，是只能在类的内部访问的方法和属性，外部不能访问。这是常见需求，有理由代码的封装，但ES6不提供，只能通过变通方法
+摸你实现。
+
+一种做法是在命名上加以区别
+```js
+class Widget {
+    // 公有方法
+    foo (baz) {
+        this._bar(baz)
+    }
+    // 私有方法
+    _bar(baz) {
+        return this.snaf = baz;
+    }
+    //...
+}
+```
+上面代码中， `_bar()` 方法前面的下划线，表示这是一个只限于内部使用的私有方法。但是这种命名是不保险的，在类的外部，
+还是可以调用到这个方法。
+
+另一种方法就是索性将私有方法移出类，因为类内部的所有方法都是对外可见的。
+```js
+class Widget{
+    foo (baz) {
+        bar.call(this,baz);
+    }
+    //...
+}
+
+function bar (baz){
+    return this.snaf = baz;
+}
+```
+
+#### 私有属性提案
+目前有一个提案， 为了 `class` 加了私有属性。方法是在属性名之前，使用`#`表示
+```js
+class IncreasingCounter {
+    #count = 0;
+    get value() {
+        console.log('Getting the current value!')
+        return this.#count;
+    }
+    increment() {
+        this.#count++;
+    }
+}
+```
