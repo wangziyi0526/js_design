@@ -34,7 +34,6 @@ class Watcher {
 function defineReactive (obj, key, val) {
     /* 一个Dep类对象 */
     const dep = new Dep();
-    console.log(dep.subs)
     Object.defineProperty(obj, key, {
         enumerable: true,
         configurable: true,
@@ -54,6 +53,7 @@ function defineReactive (obj, key, val) {
     });
 }
 function observer (value) {
+    debugger;
     if (!value || (typeof value !== 'object')) {
         return;
     }
@@ -69,7 +69,7 @@ class Vue {
         /* 新建一个Watcher观察者对象，这时候Dep.target会指向这个Watcher对象 */
          new Watcher();
         /* 在这里模拟render的过程，为了触发test属性的get函数 */
-        console.log('render~', this._data.test);
+        // console.log('render~', this._data.test);
     }
 }
 let o = new Vue({
@@ -77,6 +77,7 @@ let o = new Vue({
         test: "I am test."
     }
 });
+console.log(o._data.test)
 o._data.test = 'kobe'
 console.log(o._data.test)
 
